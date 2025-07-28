@@ -1,7 +1,10 @@
 
 # 🍜 Case Study #1: Danny's Diner
+![Image](https://8weeksqlchallenge.com/images/case-study-designs/1.png)
 
 **Link:** [8 Week SQL Challenge - Case Study #1](https://8weeksqlchallenge.com/case-study-1/)
+
+
 
 ---
 
