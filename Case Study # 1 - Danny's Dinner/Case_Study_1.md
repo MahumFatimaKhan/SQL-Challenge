@@ -1,9 +1,11 @@
 
 # 🍜 Case Study #1: Danny's Diner
-![Image](https://8weeksqlchallenge.com/images/case-study-designs/1.png)
+![Image](/assets/Case_Study_1.png)
 
 **Link:** [8 Week SQL Challenge - Case Study #1](https://8weeksqlchallenge.com/case-study-1/)
 
+**Entity Relationship Diagram:** 
+![Image1](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_ERD.png)
 
 
 ---
@@ -18,7 +20,7 @@ GROUP BY customer_id
 ORDER BY total_amount DESC
 LIMIT 5;
 ```
-
+![Image2](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output1.png)
 ---
 
 ### 2. How many days has each customer visited the restaurant?
@@ -30,7 +32,7 @@ GROUP BY customer_id
 ORDER BY visits DESC
 LIMIT 5;
 ```
-
+![Image3](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output2.png)
 ---
 
 ### 3. What was the first item from the menu purchased by each customer?
@@ -46,7 +48,7 @@ FROM orders
 WHERE rank = 1
 GROUP BY customer_id, product_name;
 ```
-
+![Image4](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output3.png)
 ---
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
@@ -58,7 +60,7 @@ GROUP BY product_name
 ORDER BY sales DESC 
 LIMIT 1;
 ```
-
+![Image5](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output4.png)
 ---
 
 ### 5. Which item was the most popular for each customer?
@@ -78,7 +80,7 @@ SELECT customer_id, product_name
 FROM most_purchased 
 WHERE rank = 1;
 ```
-
+![Image6](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output5.png)
 ---
 
 ### 6. Which item was purchased first by the customer after they became a member?
@@ -95,7 +97,7 @@ SELECT customer_id, product_name
 FROM first_order 
 WHERE rank = 1;
 ```
-
+![Image7](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output6.png)
 ---
 
 ### 7. Which item was purchased just before the customer became a member?
@@ -112,7 +114,7 @@ SELECT customer_id, product_name
 FROM last_purchased 
 WHERE rank = 1;
 ```
-
+![Image8](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output7.png)
 ---
 
 ### 8. What is the total items and amount spent for each member before they became a member?
@@ -128,7 +130,7 @@ WITH summary AS (
 SELECT * 
 FROM summary;
 ```
-
+![Image9](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output8.png)
 ---
 
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
@@ -146,7 +148,7 @@ FROM dannys_diner.sales s
 INNER JOIN points p ON p.product_id = s.product_id
 GROUP BY customer_id;
 ```
-
+![Image10](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output9.png)
 ---
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
@@ -176,3 +178,4 @@ SELECT customer_id, SUM(points) AS points
 FROM points_customer 
 GROUP BY customer_id;
 ```
+![Image11](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_1_Output10.png)
