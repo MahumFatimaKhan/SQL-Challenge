@@ -1,7 +1,7 @@
 # 🍕Case Study #2: Pizza Runner
 ![Image](/assets/Case_Study_2.png)
 
-**Link:** [8 Week SQL Challenge - Case Study #1](https://8weeksqlchallenge.com/case-study-2/)
+**Link:** [8 Week SQL Challenge - Case Study #2](https://8weeksqlchallenge.com/case-study-2/)
 
 **Entity Relationship Diagram:** 
 ![Image1](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_ERD.png)
@@ -92,26 +92,18 @@ SELECT COUNT(ORDER_ID) AS TOTAL_PIZZA_ORDERS FROM customer_orders_temp
 ![Image4](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A1.png)
 
 ### 2. How many unique customer orders were made?
-
-
-
-
 ```sql
 SELECT COUNT(DISTINCT ORDER_ID) AS CUSTOMER_ORDERS FROM customer_orders_temp
 ```
-
+![Image5](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A2.png)
 
 ### 3. How many successful orders were delivered by each runner?
-
-
-
-
 ```sql
 SELECT COUNT(ORDER_ID) AS ORDERS,RUNNER_ID FROM runner_orders_temp
 WHERE CANCELLATION IS NULL
 GROUP BY 2
 ```
-
+![Image6](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A3.png)
 
 ### 4. How many of each type of pizza was delivered?
 ```sql
@@ -121,6 +113,8 @@ inner join pizza_names p on p.pizza_id =c.pizza_id
 WHERE CANCELLATION IS NULL
 GROUP BY 1
 ```
+![Image7](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A4.png)
+
 ### 5. How many Vegetarian and Meatlovers were ordered by each customer
 ```sql
 SELECT pizza_name,customer_id,COUNT(c.pizza_id) AS pizzas FROM runner_orders_temp r
@@ -129,17 +123,9 @@ inner join pizza_names p on p.pizza_id =c.pizza_id
 WHERE CANCELLATION IS NULL
 GROUP BY 1,2
 ```
-
-
-
-
-
-
-
+![Image8](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A5.png)
 
 ### 6. What was the maximum number of pizzas delivered in a single order?
-
-
 ```sql
 SELECT c.order_id,count(pizza_id) AS pizzas FROM runner_orders_temp r
 INNER JOIN customer_orders_temp c on c.order_id = r.order_id
@@ -147,15 +133,10 @@ WHERE CANCELLATION IS NULL
 GROUP BY 1
 order by pizzas desc limit 1
 ```
-
-
-
-
+![Image9](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A6.png)
 
 
 ### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
-
-
 ```sql
 select customer_id,
 sum(case when exclusions is null and extras is null then 1
@@ -168,8 +149,7 @@ WHERE CANCELLATION IS NULL
 group by 1
 order by 1
 ```
-
-
+![Image10](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A7.png)
 
 
 ### 8.How many pizzas were delivered that had both exclusions and extras?
@@ -182,8 +162,7 @@ and exclusions is not null
 and extras is not null
 order by 1
 ```
-
-
+![Image11](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A8.png)
 
 
 ### 9. What was the total volume of pizzas ordered for each hour of the day?
@@ -192,30 +171,21 @@ SELECT EXTRACT(HOUR FROM ORDER_TIME) AS HOUR,COUNT(ORDER_ID) AS ORDERS FROM cust
 GROUP BY 1
 ORDER BY 1
 ```
-
-
+![Image12](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A9.png)
 
 
 ### 10. What was the volume of orders for each day of the week?
-
-
 ```sql
 SELECT TO_CHAR(order_time, 'Day') AS DAY,COUNT(ORDER_ID) AS ORDERS FROM customer_orders_temp
 GROUP BY 1
 ORDER BY 1
 ```
-
-
-
-
+![Image13](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A10.png)
 
 
 ## B. Runner and Customer Experience
+
 ### 1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
-
-
-
-
 ```sql
 SELECT
 FLOOR((registration_date - DATE '2021-01-01') / 7) + 1 AS registration_week,
@@ -239,16 +209,10 @@ FLOOR(...) → rounds down to full weeks
 
 +' 1 → makes Jan 1 fall in week 1
 
-
-
-
+![Image14](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B1.png)
 
 
 ### 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
-
-
-
-
 ```sql
 WITH runner_time AS (
 SELECT
@@ -265,11 +229,10 @@ ROUND(AVG(minutes_diff)::numeric, 2) AS avg_time
 FROM runner_time
 GROUP BY 1;
 ```
+![Image15](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B2.png)
 
 
 ### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
-
-
 ```sql
 WITH runner_time AS (
 SELECT
@@ -288,13 +251,11 @@ FROM runner_time
 GROUP BY 1
 order by 1;
 ```
-
+![Image16](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B3.png)
 
 
 
 ### 4. What was the average distance travelled for each customer?
-
-
 ```sql
 select customer_id, ROUND(AVG(distance)::numeric, 2) AS avg_distance
 from customer_orders_temp c left join
@@ -302,14 +263,7 @@ runner_orders_temp r on  c.order_id = r.order_id
 group by 1
 order by 1
 ```
-
-
-
-
-
-
-
-
+![Image17](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B4.png)
 
 
 ### 5. What was the difference between the longest and shortest delivery times for all orders?
@@ -318,24 +272,21 @@ select max(duration)-min(duration) as duration_diff
 from
 runner_orders_temp
 ```
-
+![Image18](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B5.png)
 
 
 
 ### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
-
-
 ```sql
 select runner_id,order_id,(distance/duration*60) as speed
 from
 runner_orders_temp WHERE CANCELLATION IS NULL
 order by 1
 ```
+![Image19](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B6.png)
 
 
 ### 7. What is the successful delivery percentage for each runner?
-
-
 ```sql
 SELECT
 runner_id,
@@ -352,14 +303,12 @@ FROM runner_orders_temp
 GROUP BY 1
 order by 1;
 ```
+![Image20](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_B7.png)
 
 
 ##  C. Ingredient Optimisation
 
-
 ### 1. What are the standard ingredients for each pizza?
-
-
 ```sql
 with toppings as (SELECT
 pr.pizza_id,pizza_name,
@@ -371,15 +320,10 @@ select pizza_name, topping_name
 from toppings t
 inner join pizza_toppings pt on t.topping_id =pt.topping_id
 ```
-
-
-
-
+![Image21](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_C1.png)
 
 
 ### 2. What was the most commonly added extra?
-
-
 ```sql
 with extras as (
 select order_id,regexp_split_to_table(extras,'[,\s]+')::integer as topping_id from customer_orders_temp
@@ -388,11 +332,10 @@ select topping_name, count(order_id) as count_of_toppings from extras e
 left join pizza_toppings t on e.topping_id=t.topping_id
 group by 1
 ```
+![Image22](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_C2.png)
 
 
 ### 3. What was the most common exclusion?
-
-
 ```sql
 with exclusions as (
 select order_id,regexp_split_to_table(exclusions,'[,\s]+')::integer as topping_id from customer_orders_temp
@@ -401,6 +344,7 @@ select topping_name, count(order_id) as count_of_toppings from exclusions e
 left join pizza_toppings t on e.topping_id=t.topping_id
 group by 1
 ```
+![Image23](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_C3.png)
 
 
 ### 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
@@ -408,8 +352,6 @@ Meat Lovers
 Meat Lovers - Exclude Beef
 Meat Lovers - Extra Bacon
 Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
-
-
 ```sql
 WITH excluded_toppings AS (
 SELECT
@@ -477,19 +419,11 @@ END AS order_item
 FROM grouped
 ORDER BY order_id;
 ```
-
-
-
-
-
-
-
-
-
-
+![Image24](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_C4.png)
 
 
 ## D. Pricing and Ratings
+
 ### 1. If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 ```sql
 WITH valid_deliveries AS (
@@ -514,16 +448,10 @@ SELECT
 SUM(price) AS total_revenue
 FROM delivered_pizzas;
 ```
+![Image25](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_D1.png)
 
 
-
-
-
-
-
-
-### 2. What if there was an additional $1 charge for any pizza extras?
-Add cheese is $1 extra
+### 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
 ```sql
 WITH valid_deliveries AS (
 SELECT order_id
@@ -566,15 +494,11 @@ SELECT
 SUM(total_price) AS total_revenue
 FROM final_revenue;
 ```
-
+![Image26](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_D2.png)
 
 
 
 ### 3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
-
-
-
-
 ```sql
 DROP TABLE IF EXISTS runner_ratings;
 CREATE TABLE runner_ratings (
@@ -586,8 +510,6 @@ rating_comment TEXT,
 rating_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
-
-
 
 
 ### 4. Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
@@ -653,6 +575,7 @@ AND dd.runner_id = rr.runner_id
 SELECT * FROM final_output
 ORDER BY order_id;
 ```
+![Image27](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_D4.png)
 
 
 
@@ -695,7 +618,7 @@ FROM revenue r, runner_payments rp
 )
 SELECT * FROM final_result;
 ```
-
+![Image28](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_D5.png)
 
 
 
