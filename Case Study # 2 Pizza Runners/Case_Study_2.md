@@ -1,5 +1,10 @@
 # 🍕Case Study #2: Pizza Runner
+![Image](/assets/Case_Study_2.png)
 
+**Link:** [8 Week SQL Challenge - Case Study #1](https://8weeksqlchallenge.com/case-study-2/)
+
+**Entity Relationship Diagram:** 
+![Image1](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_ERD.png)
 
 Before writing SQL queries, I explored the customer_orders and runner_orders tables to understand their structure. I noticed missing values in order status and timestamp columns, along with inconsistencies like text stored instead of numeric or boolean data. To ensure reliable analysis, I cleaned the data by standardizing types and handling nulls, creating a solid base for further querying.
 To clean null values:
@@ -20,7 +25,6 @@ END AS extras,
 order_time
 FROM pizza_runner.customer_orders;
 ```
-
 
 ```sql
 CREATE TEMP TABLE runner_orders_temp AS
@@ -61,6 +65,7 @@ information_schema.columns
 WHERE
 table_name = 'runner_orders_temp';
 ```
+![Image2](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_Cleaning.png)
 
 
 Changing the data types of pickup time, distance, duration, cancellation
@@ -76,8 +81,7 @@ USING NULLIF(pickup_time, '')::TIMESTAMP,
 ALTER COLUMN distance TYPE FLOAT USING distance::FLOAT,
 ALTER COLUMN duration TYPE INT USING duration::INT;
 ```
-
-
+![Image3](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_Cleaning2.png)
 
 
 ## A. Pizza Metrics
@@ -85,6 +89,8 @@ ALTER COLUMN duration TYPE INT USING duration::INT;
 ```sql
 SELECT COUNT(ORDER_ID) AS TOTAL_PIZZA_ORDERS FROM customer_orders_temp
 ```
+![Image4](https://github.com/MahumFatimaKhan/SQL-Challenge/blob/main/assets/Case_Study_2_A1.png)
+
 ### 2. How many unique customer orders were made?
 
 
